@@ -19,6 +19,7 @@ function requestPlaces(venueType) {
 }
 
 function receivePlaces(venueType, json) {
+  console.log(json)
   return {
     type: RECEIVE_PLACES,
     venueType,
@@ -29,7 +30,14 @@ function receivePlaces(venueType, json) {
 function fetchPlaces(venueType) {
   return dispatch => {
     dispatch(requestPlaces(venueType));
-    return fetch(`https://www.reddit.com/r/${reddit}.json`)
+    return fetch('https://maps.googleapis.com/maps/api/place/nearbysearch/json', {
+        body: {
+          key: 'AIzaSyAb0IEEeVY2XLnNf34tb9H_yfZxGxc0Ce8',
+          location: '51.5265,0.0825',
+          radius: 1000,
+          keyword: venueType
+        }
+      })
       .then(response => response.json())
       .then(json => dispatch(receivePlaces(venueType, json)));
   };

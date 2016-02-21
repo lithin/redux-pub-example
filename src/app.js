@@ -7,7 +7,7 @@ import Places from './components/places';
 class App extends Component {
   constructor(props) {
     super(props);
-    //this.handleChange = this.handleChange.bind(this);
+    this.handleChange = this.handleChange.bind(this);
   }
 
   componentDidMount() {
@@ -22,9 +22,9 @@ class App extends Component {
     }
   }
 
-  handleChange = (nextVenueType) => {
+  handleChange(nextVenueType) {
     this.props.dispatch(selectVenueType(nextVenueType));
-  };
+  }
 
   render() {
     const { venueType, places, isFetching } = this.props;
